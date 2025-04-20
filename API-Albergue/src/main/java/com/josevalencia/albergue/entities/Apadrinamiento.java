@@ -1,5 +1,7 @@
 package com.josevalencia.albergue.entities;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
@@ -8,7 +10,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,21 +18,29 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Adopcion {
-
+public class Apadrinamiento implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	private LocalDateTime fechaAdopcion;
-	private String descripcion;
 	
 	@ManyToOne
 	@JoinColumn(name = "persona_id")
 	private Persona persona;
 	
-	@OneToOne
-	@JoinColumn(name = "animal_id",unique= true)
+	@ManyToOne
+	@JoinColumn(name = "animal_id")
 	private Animal animal;
+	
+	private LocalDateTime fechaInicio;
+	
+	@ManyToOne
+	@JoinColumn(name = "tipo_apadrinamiento_id")
+	private TipoApadrinamiento tipoApadrinamiento;
+	
+	private BigDecimal montoMensual;
+	private String observaciones;
 	
 }
