@@ -30,6 +30,7 @@ public class Animal implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String codigo;
 	private String nombre;
 	@ManyToOne
 	@JoinColumn(name="especie_id")
